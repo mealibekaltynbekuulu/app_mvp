@@ -11,9 +11,15 @@ interface EmailTextInputProps {
   value: string;
   onChangeText: (value: string) => void;
 }
-
 const EmailTextInput: React.FC<EmailTextInputProps> = (props) => {
-  return <FormTextInput {...props} keyboardType={"email-address"} />;
+  return (
+    <FormTextInput
+      {...props}
+      keyboardType={"email-address"}
+      textContentType={"emailAddress"}
+      caretHidden={false}
+    />
+  );
 };
 
 const FormTextInput = styled.TextInput`
@@ -24,4 +30,5 @@ const FormTextInput = styled.TextInput`
   border-radius: 10px;
   margin-bottom: 10px;
 `;
+
 export default EmailTextInput;

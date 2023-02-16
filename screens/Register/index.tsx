@@ -10,11 +10,67 @@ import EmailTextInput from "../../components/forms/EmailTextInput";
 import Button from "../../components/ui/Button";
 import { TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import axios, { AxiosError } from "axios";
+import { useEffect } from "react";
+import {
+  RegisterText,
+  AgreementText,
+  FormView,
+  HaveAccountView,
+  HaveAnAccountText,
+  LoginText,
+  RegisterHeader,
+  RegisterScreen,
+} from "./styled";
+
+interface RegisterData {
+  phone_number: string;
+  email: string;
+  password: string;
+}
+
+interface RegisterResponse {
+  id: number;
+}
+
+const handleRegister = async (
+  data: RegisterData
+): Promise<RegisterResponse> => {
+  try {
+    console.log(data);
+    const response = await axios.post(
+      "https://4c94-213-109-66-166.in.ngrok.io/api/users/create/",
+      data
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (err) {
+    throw new Error(err.message || "An error occurred while registering.");
+  }
+};
+
+const getData = async () => {
+  try {
+    console.log("get data");
+    const response = await axios.get(
+      "https://4c94-213-109-66-166.in.ngrok.io/api/users/"
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 const Register = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const navigation = useNavigation<any>();
+
+  useEffect(() => {
+    // getData();
+  }, []);
   return (
     <RegisterScreen>
       <FocusedStatusBar />
@@ -56,6 +112,10 @@ const Register = () => {
             title="Зарегистрироваться"
             backgroundColor={COLORS.secondary}
             color={COLORS.white}
+            onPress={() => {
+              const data = { phone_number: phoneNumber, email, password };
+              handleRegister(data);
+            }}
           />
         </View>
         <HaveAccountView>
@@ -71,59 +131,4 @@ const Register = () => {
   );
 };
 
-const RegisterScreen = styled.View`
-  flex: 1;
-  background-color: ${COLORS.primary};
-`;
-
-const RegisterHeader = styled.View`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const RegisterText = styled.Text`
-  font-weight: 800;
-  font-size: 25px;
-  color: ${COLORS.white};
-  margin-bottom: 10px;
-`;
-
-const FormView = styled.View`
-  flex: 2;
-  background-color: ${COLORS.white};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 20px;
-`;
-
-const AgreementText = styled.Text`
-  font-size: 13px;
-  font-weight: 600;
-  text-align: center;
-  color: ${COLORS.primary};
-  margin-bottom: 20px;
-`;
-
-const HaveAccountView = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-`;
-
-const HaveAnAccountText = styled.Text`
-  font-size: 14px;
-  font-weight: 700;
-  color: ${COLORS.primary};
-  margin-right: 10px;
-`;
-
-const LoginText = styled.Text`
-  font-size: 15px;
-  font-weight: 800;
-  color: ${COLORS.secondary};
-`;
 export default Register;

@@ -12,7 +12,14 @@ interface PhoneNumberTextInputProps {
   onChangeText: (value: string) => void;
 }
 const PhoneNumberTextInput: React.FC<PhoneNumberTextInputProps> = (props) => {
-  return <FormTextInput {...props} keyboardType={"phone-pad"} />;
+  return (
+    <FormTextInput
+      {...props}
+      keyboardType={"phone-pad"}
+      textContentType={"telephoneNumber"}
+      caretHidden={false}
+    />
+  );
 };
 
 const FormTextInput = styled.TextInput`

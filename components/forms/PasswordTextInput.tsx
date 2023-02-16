@@ -18,6 +18,8 @@ const PasswordTextInput: React.FC<PasswordTextInputProps> = (props) => {
       {...props}
       secureTextEntry={true}
       keyboardType={"numbers-and-punctuation"}
+      textContentType={"password"}
+      caretHidden={false}
     />
   );
 };

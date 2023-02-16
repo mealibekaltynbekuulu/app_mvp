@@ -9,11 +9,24 @@ import PasswordTextInput from "../../components/forms/PasswordTextInput";
 import LoginButton from "../../components/ui/Button";
 import { TouchableWithoutFeedback } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import {
+  DoNotHaveAnAccountText,
+  ForgotPassword,
+  ForgotPasswordText,
+  FormView,
+  LoginScreen,
+  Register,
+  RegisterText,
+  SignInText,
+  WelcomeText,
+  WelcomeView,
+} from "./styled";
 
 const Login = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const navigation = useNavigation<any>();
+
   return (
     <LoginScreen>
       <FocusedStatusBar />
@@ -63,73 +76,5 @@ const Login = () => {
     </LoginScreen>
   );
 };
-const LoginScreen = styled.SafeAreaView`
-  background-color: ${COLORS.primary};
-  flex: 1;
-`;
 
-const WelcomeView = styled.View`
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const WelcomeText = styled.Text`
-  font-weight: 800;
-  font-size: 30px;
-  color: ${COLORS.white};
-  margin-bottom: 10px;
-`;
-
-const SignInText = styled.Text`
-  font-weight: 800;
-  font-size: 16px;
-  color: ${COLORS.white};
-  margin-bottom: 10px;
-`;
-
-// FORM CONTENT
-const FormView = styled.View`
-  flex: 1;
-  background-color: ${COLORS.white};
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  padding: 20px;
-`;
-
-const ForgotPassword = styled.View`
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const ForgotPasswordText = styled.Text`
-  font-size: 14px;
-  font-weight: 700;
-  color: ${COLORS.secondary};
-  margin-bottom: 20px;
-`;
-
-const Register = styled.View`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-`;
-
-const DoNotHaveAnAccountText = styled.Text`
-  font-size: 14px;
-  font-weight: 700;
-  color: ${COLORS.primary};
-  margin-right: 10px;
-`;
-
-const RegisterText = styled.Text`
-  font-size: 15px;
-  font-weight: 800;
-  color: ${COLORS.secondary};
-`;
 export default Login;

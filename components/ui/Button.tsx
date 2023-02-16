@@ -11,12 +11,14 @@ interface ButtonProps {
   title: string;
   color: string;
   backgroundColor: string;
+  onPress?: any;
 }
 const Button: React.FC<ButtonProps> = (props) => {
   return (
     <ButtonView style={{ backgroundColor: props.backgroundColor }}>
       <TouchableNativeFeedback
         background={TouchableNativeFeedback.Ripple("", true)}
+        onPress={props.onPress}
       >
         <ButtonInner>
           <ButtonText style={{ color: props.color }}>{props.title}</ButtonText>
